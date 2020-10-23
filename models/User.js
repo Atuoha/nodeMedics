@@ -18,7 +18,7 @@ const newUser = new Schema({
 
     role:{
         type: String,
-        defualt: 'Subscriber'
+        default: 'Subscriber'
     },
 
     status:{

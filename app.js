@@ -9,6 +9,8 @@ const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-acce
 const bodyParser = require('body-parser')
 const flash = require('connect-flash')
 const session = require('express-session')
+const passport = require('passport')
+
 
 
 mongoose.connect('mongodb://localhost:27017/nodeMedics',{ useNewUrlParser: true, useUnifiedTopology: true})
@@ -46,17 +48,24 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(flash())
 
 
+
 // Session Middleware
 app.use(session({
     secret: 'tonyAtuoha',
     resave: true,
     saveUninitialized: true
-}));
+}))
+
+//passport inits
+app.use(passport.initialize())
+app.use(passport.session())
 
 // setting local variables
 app.use( (req, res, next)=>{
     res.locals.error_msg = req.flash('error_msg')
     res.locals.success_msg = req.flash('success_msg')
+    res.locals.error = req.flash('error')
+    res.locals.loggedUser = req.user || null
 
     next()
 })
