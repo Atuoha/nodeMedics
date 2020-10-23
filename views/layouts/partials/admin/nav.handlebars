@@ -128,9 +128,15 @@
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="profile-ava">
-                                <img alt="" src="/uploads/1601928444384-0.jpg" width="30">
+                                {{#if loggedUser.file}}
+                                 <img alt="" src="/uploads/{{loggedUser.file}}" width="30">
+                                {{else}}
+                                  <img alt="" src="/uploads/default.png" width="30">
+                                {{/if}}
                             </span>
-                            <span class="username">Tony Atuoha</span>
+
+
+                            <span class="username">{{loggedUser.name}}</span>
                             <b class="caret"></b>
                         </a>
             <ul class="dropdown-menu extended logout">

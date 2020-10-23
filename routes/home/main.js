@@ -17,11 +17,21 @@ router.get('/', (req, res)=>{
 })
 
 router.get('/login', (req, res)=>{
-    res.render('home/login')
+
+    if(req.user){
+        res.redirect('/admin')
+    }else{
+        res.render('home/login')
+    }
 })
 
 router.get('/register', (req, res)=>{
-    res.render('home/register')
+
+    if(req.user){
+        res.redirect('/admin')
+    }else{
+        res.render('home/register')
+    }
 })
 
 router.post('/register', (req, res)=>{
@@ -103,6 +113,13 @@ router.post('/login', (req, res, next)=>{
         failureRedirect: '/login',
         failureFlash: true
     })(req, res, next)
+})
+
+
+
+router.get('/logout', (req, res)=>{
+    req.logout()
+    res.redirect('/')
 })
 
 module.exports = router

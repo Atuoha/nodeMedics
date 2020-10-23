@@ -1,0 +1,34 @@
+
+
+<table class="table table-striped bordered">
+    <thead>
+       <tr>
+           <th>Name</th>
+           <th>Tag</th>
+           <th>Sub Content</th>
+           <th>Content</th>
+           <th>Imagery</th>
+           <th>Actions</th>
+       </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            {{#if departments}}
+                {{#each departments}}
+                    <td>{{name}}</td>
+                    <td>{{tag}}</td>
+                    <td>{{intro}}</td>
+                    <td>{{content}}</td>
+                    <td><img src="/uploads/{{file}}" width="200" class="thumbnail"></td>
+                    <td><a href="/admin/department/edit/{{id}}" class="btn btn-success"><i class="fa fa-pencil"></i> Edit</a></td>
+                    <td><a href="/admin/department/show/{{id}}" class="btn btn-warning"><i class="fa fa-eye"></i> View</a></td>
+                    <td><a href="/admin/department/delete/{{id}}" class="btn btn-danger"><i class="fa fa-remove"></i> Delete</a></td>
+
+                {{/each}}
+            {{else}}
+            <div class="alert alert-success">No Department to show</div>
+            {{/if}}
+        </tr>
+    </tbody>
+</table>

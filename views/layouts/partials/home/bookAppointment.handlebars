@@ -7,26 +7,31 @@
           <p>Here in nodeMedics, we've hired soldiers that carry armour wearing whites or light blue colored garments with the zeal to protect lives with all they're gifted with</p>
         </div>
 
+      {{#if loggedUser}}
         <form action="forms/appointment.php" method="post" role="form" class="php-email-form">
           <div class="form-row">
             <div class="col-md-4 form-group">
-              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+              <input type="text" name="name" class="form-control" id="name" value="{{#if loggedUser}} {{loggedUser.name}} {{/if}}" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
               <div class="validate"></div>
             </div>
+            
             <div class="col-md-4 form-group">
-              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
+              <input type="email" class="form-control" name="email" id="email"  value="{{#if loggedUser}} {{loggedUser.email}} {{/if}}" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
               <div class="validate"></div>
             </div>
+
             <div class="col-md-4 form-group">
-              <input type="tel" class="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+              <input type="tel" class="form-control" name="phone" id="phone" value="{{#if loggedUser}} {{loggedUser.phone}} {{/if}}" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
               <div class="validate"></div>
             </div>
           </div>
+
           <div class="form-row">
             <div class="col-md-4 form-group">
               <input type="datetime" name="date" class="form-control datepicker" id="date" placeholder="Appointment Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
               <div class="validate"></div>
             </div>
+
             <div class="col-md-4 form-group">
               <select name="department" id="department" class="form-control">
                 <option value="">Select Department</option>
@@ -36,6 +41,7 @@
               </select>
               <div class="validate"></div>
             </div>
+
             <div class="col-md-4 form-group">
               <select name="doctor" id="doctor" class="form-control">
                 <option value="">Select Doctor</option>
@@ -48,16 +54,15 @@
           </div>
 
           <div class="form-group">
-            <textarea class="form-control" name="message" rows="5" placeholder="Message (Optional)"></textarea>
+            <textarea class="form-control" name="message" rows="5" placeholder="Message"></textarea>
             <div class="validate"></div>
           </div>
-          <div class="mb-3">
-            <div class="loading">Loading</div>
-            <div class="error-message"></div>
-            <div class="sent-message">Your appointment request has been sent successfully. Thank you!</div>
-          </div>
+        
           <div class="text-center"><button type="submit">Make an Appointment</button></div>
         </form>
 
+        {{else}}
+          <div class="alert alert-success"><h3 class="text-center"><a href="/login">Sign in</a> to book an appointment</h3></div>
+        {{/if}}
       </div>
     </section><!-- End Appointment Section -->

@@ -21,6 +21,14 @@ const newUser = new Schema({
         default: 'Subscriber'
     },
 
+    phone:{
+        type: String
+    },
+
+    file:{
+        type: String
+    },
+
     status:{
         type: String,
         default: 'Active'

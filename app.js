@@ -10,6 +10,7 @@ const bodyParser = require('body-parser')
 const flash = require('connect-flash')
 const session = require('express-session')
 const passport = require('passport')
+const upload = require('express-fileupload')
 
 
 
@@ -71,6 +72,10 @@ app.use( (req, res, next)=>{
 })
 
 
+//setting upload
+app.use(upload())
+
+
 //home router
 const home = require('./routes/home/main')
 app.use('/', home)
@@ -84,6 +89,12 @@ app.use('/admin', admin)
 // admin reservtion
 const appointment = require('./routes/admin/appointment')
 app.use('/admin/appointment', appointment)
+
+
+//admin department
+const department = require('./routes/admin/department')
+app.use('/admin/department', department)
+
 
 
 app.listen(port, ()=>{

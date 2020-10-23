@@ -2,7 +2,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto"><a href="index.html">nodeMedics</a></h1>
+      <h1 class="logo mr-auto"><a href="/">nodeMedics</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -15,14 +15,18 @@
           <li><a href="#departments">Departments</a></li>
           <li><a href="#doctors">Doctors</a></li>
           <li><a href="#contact">Contact</a></li>
-          <li class="drop-down"><a href="">User</a>
+          {{#if loggedUser}}
+          <li class="drop-down"><a href="">{{loggedUser.name}}</a>
             <ul>
-                <li><a href="#">Logout</a></li>
-                <li><a href="#">Dashboard</a></li>
+                <li><a href="/admin">Dashboard</a></li>
+                <li><a href="/logout">Sign out</a></li>
             </ul>
         </li>
 
-        <li><a href="/login">Login</a></li>
+        {{else}}
+        <li><a href="/login">Sign in</a></li>
+
+        {{/if}}
         </ul>
       </nav><!-- .nav-menu -->
 
