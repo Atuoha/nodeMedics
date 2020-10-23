@@ -6,6 +6,10 @@ const path = require('path')
 const handlebars = require('express-handlebars')
 const Handlebars = require('Handlebars')
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
+const bodyParser = require('body-parser')
+const flash = require('connect-flash')
+const session = require('express-session')
+
 
 mongoose.connect('mongodb://localhost:27017/nodeMedics',{ useNewUrlParser: true, useUnifiedTopology: true})
     .then(db=>{
@@ -33,6 +37,31 @@ app.engine('handlebars', handlebars(
 app.set('view engine', 'handlebars')
 
 
+//setting bodyParsers
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}))
+
+
+//setting flash
+app.use(flash())
+
+
+// Session Middleware
+app.use(session({
+    secret: 'tonyAtuoha',
+    resave: true,
+    saveUninitialized: true
+}));
+
+// setting local variables
+app.use( (req, res, next)=>{
+    res.locals.error_msg = req.flash('error_msg')
+    res.locals.success_msg = req.flash('success_msg')
+
+    next()
+})
+
+
 //home router
 const home = require('./routes/home/main')
 app.use('/', home)
@@ -44,8 +73,8 @@ app.use('/admin', admin)
 
 
 // admin reservtion
-const reserve = require('./routes/admin/reservation')
-app.use('/admin/reserve', reserve)
+const appointment = require('./routes/admin/appointment')
+app.use('/admin/appointment', appointment)
 
 
 app.listen(port, ()=>{

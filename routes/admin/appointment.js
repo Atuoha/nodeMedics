@@ -8,16 +8,24 @@ router.all('/*', (req, res, next)=>{
 })
 
 router.get('/', (req, res)=>{
-    res.render('admin/reservation')
+    res.render('admin/appointment')
 })
 
 
 router.get('/create', (req, res)=>{
-    res.render('admin/reservation/create')
+    res.render('admin/appointment/create')
 })
 
 router.get('/dummy', (req, res)=>{
-    res.render('admin/reservation/dummy')
+    res.render('admin/appointment/dummy')
+})
+
+router.post('/create', (req, res)=>{
+
+})
+
+router.post('/dummy', (req, res)=>{
+    
 })
 
 
