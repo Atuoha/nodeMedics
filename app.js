@@ -37,6 +37,17 @@ app.set('view engine', 'handlebars')
 const home = require('./routes/home/main')
 app.use('/', home)
 
+
+//admin router
+const admin = require('./routes/admin/main')
+app.use('/admin', admin)
+
+
+// admin reservtion
+const reserve = require('./routes/admin/reservation')
+app.use('/admin/reserve', reserve)
+
+
 app.listen(port, ()=>{
     console.log('Listening...')
 })
