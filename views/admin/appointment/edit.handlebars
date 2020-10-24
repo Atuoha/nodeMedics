@@ -1,12 +1,12 @@
 
 
-<form method="POST" action="">
+<form method="POST" action="/admin/appointment/create">
     
     <div class="row">
         <div class="col-md-4">
              <div class="form-group dates-wrap">
                 <label class="control-label">Date</label>
-                <input type="text" id="datepicker1" placeholder="Appointment Date" required class="form-control" name="date">
+                <input type="text" id="datepicker1" value="{{appointment.date}}" placeholder="Appointment Date" required class="form-control" name="date">
             </div>
         </div>
 
@@ -14,11 +14,12 @@
          <div class="col-md-4">
              <div class="form-group">
                 <label class="control-label">Department</label>
-                <select name="departement" id="" class="form-control">
-                    <option value="">Cardiology</option>
-                    <option value="">Surgery</option>
-                    <option value="">Optometry</option>
-                    <option value="">Dentistery</option>
+                <select name="department" id="" value="{{appointment.department}}" class="form-control">
+                  {{#select appointment.department}}  
+                        {{#each depts}}
+                            <option value="{{id}}">{{name}}</option>
+                        {{/each}}
+                   {{/select}} 
                 </select>
             </div>
         </div>
@@ -27,11 +28,12 @@
          <div class="col-md-4">
              <div class="form-group">
                 <label class="control-label">Doctor</label>
-                 <select name="departement" id="" class="form-control">
-                    <option value="">John Doe</option>
-                    <option value="">Stella Marcus</option>
-                    <option value="">Philips Mattew</option>
-                    <option value="">Grace Uplift</option>
+                 <select name="doctor" id="" value="{{appointment.doctor}}" class="form-control">
+                   {{#select appointment.doctor}}  
+                        {{#each doctors}}
+                            <option value="{{id}}">{{name}}</option>
+                        {{/each}}
+                   {{/select}} 
                 </select>
             </div>
         </div>
@@ -40,11 +42,11 @@
 
     <div class="form-group">
         <label for="" class="control-label">Message</label>
-        <textarea name="message" id="" placeholder="Enter Message" class="form-control" required cols="30" rows="5"></textarea>
+        <textarea name="message" id="" placeholder="Enter Message" value="{{appointment.message}}" class="form-control" required cols="30" rows="5"></textarea>
     </div>
 
     <div class="form-group">
-        <button type="submit" class="btn btn-success">Submit Edit</button>
+        <button type="submit" class="btn btn-primary">Update Appointment</button>
     </div>
 
 </form>

@@ -22,12 +22,13 @@ mongoose.connect('mongodb://localhost:27017/nodeMedics',{ useNewUrlParser: true,
 
 app.use(express.static(path.join(__dirname, 'public')))  // loading static files
 
+const {select, generate_date, ifeq} = require('./helpers/handlebars-helpers')
 
 //handlebars
 app.engine('handlebars', handlebars(
     {
         defaultLayout: 'home',
-        helpers:{},
+        helpers:{select: select, generate_date: generate_date, ifeq: ifeq},
         partialsDir: path.join(__dirname, "views/layouts/partials"),
         handlebars: allowInsecurePrototypeAccess(Handlebars)
     
@@ -86,7 +87,7 @@ const admin = require('./routes/admin/main')
 app.use('/admin', admin)
 
 
-// admin reservtion
+// admin appointment
 const appointment = require('./routes/admin/appointment')
 app.use('/admin/appointment', appointment)
 
@@ -94,6 +95,14 @@ app.use('/admin/appointment', appointment)
 //admin department
 const department = require('./routes/admin/department')
 app.use('/admin/department', department)
+
+
+//admin doctor
+const doctor = require('./routes/admin/doctor')
+app.use('/admin/doctor', doctor)
+
+
+
 
 
 

@@ -1,33 +1,53 @@
+<div class="alert alert-success">
+    Viewing Appointment by:  - {{appointment.user.name}}
+</div>
 
 
 
-<table>
-    
+<table class="table table-striped bordered">
+    <tr>
     <th>Name</th>
-    <td>John</td>
+    <td>{{appointment.user.name}}</td>
+    </tr>
 
+    <tr>
     <th>Email</th>
-    <td>john@gmail.com</td>
+    <td>{{appointment.user.email}}</td>
+    </tr>
 
+    <tr>
     <th>Phone</th>
-    <td>+234</td>
+    <td>{{appointment.user.phone}}</td>
+    </tr>
 
+    <tr>
     <th>Date</th>
-    <td>23/09/2000</td>
+     <td>{{generate_date appointment.date 'MMM-Do-Y'}} </td>
+    </tr>
 
+    <tr>
     <th>Department</th>
-    <td>Cardiology</td>
+    <td>{{appointment.department.name}}</td>
+    </tr>
 
+    <tr>
     <th>Doctor</th>
-    <td>Steve Doe</td>
+    <td>{{appointment.doctor.name}}</td>
+    </tr>
 
+    <tr>
     <th>Message</th>
-    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas molestias cum beatae omnis modi corporis officia expedita quibusdam ipsa hic. Exercitationem accusamus esse eius? Ipsum earum maiores soluta perferendis totam!</td>
+    <td>{{appointment.message}}</td>
+    </tr>
 
+    <tr>
     <th>Edit</th>
-    <td></td>
-
+    <td><a href="/admin/appointment/edit/{{appintment.id}}" class="btn btn-success"><i class="fa fa-pencil"></i> Edit</a></td>
+    </tr>
+   
+    <tr>
     <th>Delete</th>
-    <td></td>
+    <td><a href="/admin/appointment/delete/{{appointment.id}}" class="btn btn-danger"><i class="fa fa-remove"></i> Delete</td>
+    </tr>
 
 </table>

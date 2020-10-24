@@ -1,0 +1,35 @@
+
+
+<table class="table table-striped bordered">
+    <thead>
+       <tr>
+           <th>Full Name</th>
+           <th>Email</th>
+           <th>Field</th>
+           <th>Intro</th>
+           <th>Imagery</th>
+           <th>Actions</th>
+       </tr>
+    </thead>
+
+    <tbody>
+       
+            {{#if doctors}}
+                {{#each doctors}}
+                 <tr>
+                    <td>{{name}}</td>
+                    <td>{{email}}</td>
+                    <td>{{field}}</td>
+                    <td>{{intro}}</td>
+                    <td><img src="/uploads/{{file}}" width="50" ></td>
+                    <td><a href="/admin/doctor/edit/{{id}}" class="btn btn-success"><i class="fa fa-pencil"></i> Edit</a></td>
+                    <td><a href="/admin/doctor/show/{{id}}" class="btn btn-warning"><i class="fa fa-eye"></i> View</a></td>
+                    <td><a href="/admin/doctor/delete/{{id}}" class="btn btn-danger"><i class="fa fa-remove"></i> Delete</a></td>
+                </tr>
+                    
+                {{/each}}
+            {{else}}
+            <div class="alert alert-success">No doctor to show</div>
+            {{/if}}
+    </tbody>
+</table>

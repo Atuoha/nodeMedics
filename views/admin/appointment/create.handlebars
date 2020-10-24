@@ -14,11 +14,10 @@
          <div class="col-md-4">
              <div class="form-group">
                 <label class="control-label">Department</label>
-                <select name="departement" id="" class="form-control">
-                    <option value="">Cardiology</option>
-                    <option value="">Surgery</option>
-                    <option value="">Optometry</option>
-                    <option value="">Dentistery</option>
+                <select name="department" id="" class="form-control">
+                    {{#each depts}}
+                        <option value="{{id}}">{{name}}</option>
+                    {{/each}}
                 </select>
             </div>
         </div>
@@ -27,11 +26,10 @@
          <div class="col-md-4">
              <div class="form-group">
                 <label class="control-label">Doctor</label>
-                 <select name="departement" id="" class="form-control">
-                    <option value="">John Doe</option>
-                    <option value="">Stella Marcus</option>
-                    <option value="">Philips Mattew</option>
-                    <option value="">Grace Uplift</option>
+                 <select name="doctor" id="" class="form-control">
+                     {{#each doctors}}
+                        <option value="{{id}}">{{name}}</option>
+                    {{/each}}
                 </select>
             </div>
         </div>

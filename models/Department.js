@@ -24,6 +24,11 @@ const newDept = new Schema({
         type: String
     },
 
+    status:{
+        type: Boolean,
+        default: false
+    },
+
     date:{
         type: Date,
         default: Date.now()

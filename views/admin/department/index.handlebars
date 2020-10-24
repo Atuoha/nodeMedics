@@ -13,9 +13,10 @@
     </thead>
 
     <tbody>
-        <tr>
+       
             {{#if departments}}
                 {{#each departments}}
+                 <tr>
                     <td>{{name}}</td>
                     <td>{{tag}}</td>
                     <td>{{intro}}</td>
@@ -24,11 +25,11 @@
                     <td><a href="/admin/department/edit/{{id}}" class="btn btn-success"><i class="fa fa-pencil"></i> Edit</a></td>
                     <td><a href="/admin/department/show/{{id}}" class="btn btn-warning"><i class="fa fa-eye"></i> View</a></td>
                     <td><a href="/admin/department/delete/{{id}}" class="btn btn-danger"><i class="fa fa-remove"></i> Delete</a></td>
-
+                </tr>
+                    
                 {{/each}}
             {{else}}
             <div class="alert alert-success">No Department to show</div>
             {{/if}}
-        </tr>
     </tbody>
 </table>

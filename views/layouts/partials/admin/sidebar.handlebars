@@ -5,7 +5,7 @@
         <ul class="sidebar-menu">
           <li class="active">
             <a class="" href="/admin">
-                          <i class="icon_house_alt"></i>
+                          <i class="fa fa-dashboard"></i>
                           <span>Dashboard</span>
                       </a>
           </li>
@@ -25,11 +25,55 @@
                         </a>
                 <ul class="sub">
                     <li><a class="" href="/admin/appointment">All Appointments</a></li>
+                    <li><a class="" href="/admin/appointment/{{loggedUser.id}}">My Appointments</a></li>
                     <li><a class="" href="/admin/appointment/create">Create Appointment</a></li>
-                    <li><a class="" href="/admin/appointment/dummy">Create Dummy</a></li>
-                    <li><a class="" href="/admin/appointment/dummy">All Cancelled</a></li>
+                    <li><a class="" href="/admin/appointment/cancelled/{{loggedUser.id}}">My Cancelled</a></li>
+                    <li><a class="" href="/admin/appointment/cancelled">All Cancelled</a></li>
                 </ul>
             </li>
+
+
+            <li class="sub-menu">
+            <a href="javascript:;" class="">
+                          <i class="icon_house_alt"></i>
+                          <span>Departments</span>
+                          <span class="menu-arrow arrow_carrot-right"></span>
+                      </a>
+            <ul class="sub">
+              <li><a class="" href="/admin/department">All Departments</a></li>
+              <li><a class="" href="/admin/department/create">Create Department</a></li>
+              <li><a class="" href="/admin/department/dummy">Create Dummy</a></li>
+            </ul>
+          </li>
+
+
+            <li class="sub-menu">
+            <a href="javascript:;" class="">
+                          <i class="icon_profile"></i>
+                          <span>Doctors</span>
+                          <span class="menu-arrow arrow_carrot-right"></span>
+                      </a>
+            <ul class="sub">
+              <li><a class="" href="/admin/doctor">All Doctors</a></li>
+              <li><a class="" href="/admin/doctor/create">Create Doctor</a></li>
+              <li><a class="" href="/admin/doctor/dummy">Create Dummy</a></li>
+            </ul>
+          </li>
+
+
+            <li class="sub-menu">
+            <a href="javascript:;" class="">
+                          <i class="fa fa-group"></i>
+                          <span>Users</span>
+                          <span class="menu-arrow arrow_carrot-right"></span>
+                      </a>
+            <ul class="sub">
+              <li><a class="" href="form_component.html">All Users</a></li>
+              <li><a class="" href="form_validation.html">Create Users</a></li>
+              <li><a class="" href="form_validation.html">Create Dummy</a></li>
+            </ul>
+          </li>
+
 
           <li class="sub-menu">
             <a href="javascript:;" class="">
@@ -39,13 +83,14 @@
                       </a>
             <ul class="sub">
               <li><a class="" href="form_component.html">All Contacts</a></li>
+              <li><a class="" href="form_component.html">My Contacts</a></li>
               <li><a class="" href="form_validation.html">Create Dummy</a></li>
             </ul>
           </li>
 
            <li class="sub-menu">
             <a href="javascript:;" class="">
-                          <i class="fa fa-testtube"></i>
+                          <i class="fa fa-ambulance"></i>
                           <span>Research Labs</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
@@ -71,12 +116,13 @@
 
            <li class="sub-menu">
             <a href="javascript:;" class="">
-                          <i class="icon_document_alt"></i>
+                          <i class="fa fa-thumbs-up"></i>
                           <span>Testimonies</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
               <li><a class="" href="form_component.html">All Testimonies</a></li>
+              <li><a class="" href="form_component.html">My Testimonies</a></li>
               <li><a class="" href="form_validation.html">Create Testimony</a></li>
               <li><a class="" href="form_validation.html">Create Dummy</a></li>
             </ul>
@@ -111,47 +157,7 @@
           </li>
 
 
-            <li class="sub-menu">
-            <a href="javascript:;" class="">
-                          <i class="fa fa-house"></i>
-                          <span>Departments</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-            <ul class="sub">
-              <li><a class="" href="/admin/department">All Departments</a></li>
-              <li><a class="" href="/admin/department/create">Create Department</a></li>
-              <li><a class="" href="/admin/department/dummy">Create Dummy</a></li>
-            </ul>
-          </li>
-
-
-            <li class="sub-menu">
-            <a href="javascript:;" class="">
-                          <i class="fa fa-medicine"></i>
-                          <span>Doctors</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-            <ul class="sub">
-              <li><a class="" href="form_component.html">All Doctors</a></li>
-              <li><a class="" href="form_validation.html">Create Doctor</a></li>
-              <li><a class="" href="form_validation.html">Create Dummy</a></li>
-            </ul>
-          </li>
-
-
-            <li class="sub-menu">
-            <a href="javascript:;" class="">
-                          <i class="fa fa-group"></i>
-                          <span>Users</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-            <ul class="sub">
-              <li><a class="" href="form_component.html">All Users/a></li>
-              <li><a class="" href="form_validation.html">Create Users/a></li>
-              <li><a class="" href="form_validation.html">Create Dummy</a></li>
-            </ul>
-          </li>
-
+            
         </ul>
         <!-- sidebar menu end-->
       </div>
