@@ -102,6 +102,9 @@ const doctor = require('./routes/admin/doctor')
 app.use('/admin/doctor', doctor)
 
 
+//admin users
+const users = require('./routes/admin/user')
+app.use('/admin/users', users)
 
 
 

@@ -11,7 +11,7 @@
           </li>
 
            <li class="active">
-            <a class="" href="/admin">
+            <a class="" href="/admin/users/profile/{{loggedUser.id}}">
                           <i class="fa fa-user"></i>
                           <span>Profile</span>
                       </a>
@@ -24,15 +24,17 @@
                             <span class="menu-arrow arrow_carrot-right"></span>
                         </a>
                 <ul class="sub">
-                    <li><a class="" href="/admin/appointment">All Appointments</a></li>
+                   {{#ifeq loggedUser.role 'Admin'}}
+                      <li><a class="" href="/admin/appointment">All Appointments</a></li>
+                      <li><a class="" href="/admin/appointment/cancelled">All Cancelled</a></li>
+                    {{/ifeq}}
                     <li><a class="" href="/admin/appointment/{{loggedUser.id}}">My Appointments</a></li>
                     <li><a class="" href="/admin/appointment/create">Create Appointment</a></li>
                     <li><a class="" href="/admin/appointment/cancelled/{{loggedUser.id}}">My Cancelled</a></li>
-                    <li><a class="" href="/admin/appointment/cancelled">All Cancelled</a></li>
                 </ul>
             </li>
 
-
+        {{#ifeq loggedUser.role 'Admin'}}
             <li class="sub-menu">
             <a href="javascript:;" class="">
                           <i class="icon_house_alt"></i>
@@ -61,32 +63,19 @@
           </li>
 
 
-            <li class="sub-menu">
+          <li class="sub-menu">
             <a href="javascript:;" class="">
                           <i class="fa fa-group"></i>
                           <span>Users</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="" href="form_component.html">All Users</a></li>
-              <li><a class="" href="form_validation.html">Create Users</a></li>
-              <li><a class="" href="form_validation.html">Create Dummy</a></li>
+              <li><a class="" href="/admin/users">All Users</a></li>
+              <li><a class="" href="/admin/users/create">Create Users</a></li>
+              <li><a class="" href="/admin/users/dummy">Create Dummy</a></li>
             </ul>
           </li>
 
-
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-                          <i class="fa fa-envelope"></i>
-                          <span>Contacts</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-            <ul class="sub">
-              <li><a class="" href="form_component.html">All Contacts</a></li>
-              <li><a class="" href="form_component.html">My Contacts</a></li>
-              <li><a class="" href="form_validation.html">Create Dummy</a></li>
-            </ul>
-          </li>
 
            <li class="sub-menu">
             <a href="javascript:;" class="">
@@ -114,35 +103,8 @@
             </ul>
           </li>
 
-           <li class="sub-menu">
-            <a href="javascript:;" class="">
-                          <i class="fa fa-thumbs-up"></i>
-                          <span>Testimonies</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-            <ul class="sub">
-              <li><a class="" href="form_component.html">All Testimonies</a></li>
-              <li><a class="" href="form_component.html">My Testimonies</a></li>
-              <li><a class="" href="form_validation.html">Create Testimony</a></li>
-              <li><a class="" href="form_validation.html">Create Dummy</a></li>
-            </ul>
-          </li>
 
-
-            <li class="sub-menu">
-            <a href="javascript:;" class="">
-                          <i class="fa fa-question"></i>
-                          <span>FAQs</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-            <ul class="sub">
-              <li><a class="" href="form_component.html">All FAQs</a></li>
-              <li><a class="" href="form_validation.html">Create FAQ</a></li>
-              <li><a class="" href="form_validation.html">Create Dummy</a></li>
-            </ul>
-          </li>
-
-
+          
             <li class="sub-menu">
             <a href="javascript:;" class="">
                           <i class="fa fa-gears"></i>
@@ -155,8 +117,56 @@
               <li><a class="" href="form_validation.html">Create Dummy</a></li>
             </ul>
           </li>
+        {{/ifeq}}
 
 
+           <li class="sub-menu">
+            <a href="javascript:;" class="">
+                          <i class="fa fa-envelope"></i>
+                          <span>Contacts</span>
+                          <span class="menu-arrow arrow_carrot-right"></span>
+                      </a>
+            <ul class="sub">
+              {{#ifeq loggedUser.role 'Admin'}}
+              <li><a class="" href="form_component.html">All Contacts</a></li>
+              <li><a class="" href="form_validation.html">Create Dummy</a></li>
+              {{/ifeq}}
+              <li><a class="" href="form_component.html">My Contacts</a></li>
+            </ul>
+          </li>
+
+           <li class="sub-menu">
+            <a href="javascript:;" class="">
+                          <i class="fa fa-thumbs-up"></i>
+                          <span>Testimonies</span>
+                          <span class="menu-arrow arrow_carrot-right"></span>
+                      </a>
+            <ul class="sub">
+              {{#ifeq loggedUser.role 'Admin'}}
+                <li><a class="" href="form_component.html">All Testimonies</a></li>
+                <li><a class="" href="form_validation.html">Create Dummy</a></li>
+              {{/ifeq}}
+              <li><a class="" href="form_component.html">My Testimonies</a></li>
+              <li><a class="" href="form_validation.html">Create Testimony</a></li>
+            </ul>
+          </li>
+
+
+            <li class="sub-menu">
+            <a href="javascript:;" class="">
+                          <i class="fa fa-question"></i>
+                          <span>FAQs</span>
+                          <span class="menu-arrow arrow_carrot-right"></span>
+                      </a>
+            <ul class="sub">
+              {{#ifeq loggedUser.role 'Admin'}}
+              <li><a class="" href="form_component.html">All FAQs</a></li>
+              <li><a class="" href="form_validation.html">Create Dummy</a></li>
+              {{/ifeq}}
+              <li><a class="" href="form_validation.html">My FAQs</a></li>
+              <li><a class="" href="form_validation.html">Create FAQ</a></li>
+            </ul>
+          </li>
             
         </ul>
         <!-- sidebar menu end-->

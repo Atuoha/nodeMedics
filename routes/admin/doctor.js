@@ -3,7 +3,8 @@ const app = express()
 const router = express.Router()
 const faker = require('faker')
 const Doctor = require('../../models/Doctor')
-
+const fs = require('fs')
+const {isEmpty} = require('../../helpers/upload-helpers')
 
 router.all('/*', (req, res, next)=>{
     req.app.locals.layout = 'admin'

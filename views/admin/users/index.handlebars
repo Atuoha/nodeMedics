@@ -1,0 +1,42 @@
+
+
+<table class="table table-striped table-responsive">
+    <thead>
+       <tr>
+           <th>Name</th>
+           <th>Imagery</th>
+           <th>Email</th>
+           <th>Phone</th>
+           <th>Role</th>
+           <th>Status</th>
+           <th>Actions</th>
+       </tr>
+    </thead>
+
+    <tbody>
+     {{#if users}}
+      
+        {{#each users}}
+                <tr>
+                    <td>{{name}}</td>
+                    {{#if file}}
+                        <td><img src="/uploads/{{file}}" class="img-circle" alt="" width="40"></td>
+                        {{else}}
+                        <td><img src="/uploads/default.png" alt="" width="40"></td>
+                    {{/if}}
+                    <td>{{email}}</td>
+                    <td>{{phone}}</td>
+                    <td>{{role}}</td>
+                    <td>{{status}}</td>
+                    <td><a href="/admin/users/edit/{{id}}" class="btn btn-success"><i class="fa fa-pencil"></i> Edit</a></td>
+                    <td><a href="/admin/users/show/{{id}}" class="btn btn-warning"><i class="fa fa-eye"></i> View</a></td>
+                    <td><a href="/admin/users/delete/{{id}}" class="btn btn-danger"><i class="fa fa-remove"></i> Delete</a></td>
+                </tr>
+        {{/each}}
+
+      {{else}}
+        <div class="alert alert-success">No User to display</div>
+
+     {{/if}}      
+    </tbody>
+</table>
