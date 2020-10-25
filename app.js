@@ -107,7 +107,9 @@ const users = require('./routes/admin/user')
 app.use('/admin/users', users)
 
 
-
+//admin users
+const labs = require('./routes/admin/research')
+app.use('/admin/labs', labs)
 
 app.listen(port, ()=>{
     console.log('Listening...')
