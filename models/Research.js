@@ -30,7 +30,7 @@ const newLab = new Schema({
 
     estDate:{
         type: String
-    },
+    }, 
 
     status:{
         type: Boolean,

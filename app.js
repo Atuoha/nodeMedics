@@ -111,6 +111,13 @@ app.use('/admin/users', users)
 const labs = require('./routes/admin/research')
 app.use('/admin/labs', labs)
 
+
+//admin users
+const service = require('./routes/admin/service')
+app.use('/admin/service', service)
+
+
+
 app.listen(port, ()=>{
     console.log('Listening...')
 })

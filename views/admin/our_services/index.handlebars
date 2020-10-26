@@ -1,0 +1,31 @@
+
+
+<table class="table table-striped bordered table-responsive">
+    <thead>
+       <tr>
+           <th>Name</th>
+           <th>Font Awesome</th>
+           <th>Content</th>
+           <th>Actions</th>
+       </tr>
+    </thead>
+
+    <tbody>
+     {{#if services}}
+      
+        {{#each services}}
+                <tr>
+                    <td>{{name}}</td>
+                    <td><i class="fa fa-{{font}} fa-2x"</td>
+                    <td>{{content}}</td>
+                    <td><a href="/admin/service/edit/{{id}}" class="btn btn-success"><i class="fa fa-pencil"></i> Edit</a></td>
+                    <td><a href="/admin/service/delete/{{id}}" class="btn btn-danger"><i class="fa fa-remove"></i> Delete</a></td>
+                </tr>
+        {{/each}}
+
+      {{else}}
+        <div class="alert alert-success">No Service to display</div>
+
+     {{/if}}      
+    </tbody>
+</table>
