@@ -1,0 +1,41 @@
+
+ <!-- dROPZONE Externals -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/min/dropzone.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.js"></script>
+<!--  -->
+
+
+<div class="row">
+    <div class="col-md-6">
+            <div class="lead">Upload Media(s)</div>
+            <form action="/admin/media/create" method="post" class="dropzone" id="my-awesome-dropzone" enctype="multipart/form-data">
+            </form>
+    </div>
+
+
+    <div class="col-md-6">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Media</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {{#if medias}}
+                  {{#each medias}}
+                    <td><img src="/uploads/{{file}}" width="50" alt=""></td>
+                    <td><a href="/admin/users/delete/{{id}}" class="btn btn-danger"><i class="fa fa-remove"></i> Delete</a></td>
+                  {{/each}}
+               {{else}}
+                 <div class="alert alert-success">No Media to display</div>
+               {{/if}}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+
+

@@ -121,6 +121,11 @@ const contact = require('./routes/admin/contact')
 app.use('/admin/contact', contact)
 
 
+//admin media
+const media = require('./routes/admin/media')
+app.use('/admin/media', media)
+
+
 
 app.listen(port, ()=>{
     console.log('Listening...')
