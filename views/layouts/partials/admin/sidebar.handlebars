@@ -128,10 +128,11 @@
                       </a>
             <ul class="sub">
               {{#ifeq loggedUser.role 'Admin'}}
-              <li><a class="" href="form_component.html">All Contacts</a></li>
-              <li><a class="" href="form_validation.html">Create Dummy</a></li>
+              <li><a class="" href="/admin/contact">All Contacts</a></li>
+              <li><a class="" href="/admin/contact/dummy">Create Dummy</a></li>
               {{/ifeq}}
-              <li><a class="" href="form_component.html">My Contacts</a></li>
+              <li><a class="" href="/admin/contact/create">Create Contact</a></li>
+              <li><a class="" href="/admin/contact/myContacts/{{loggedUser.id}}">My Contacts</a></li>
             </ul>
           </li>
 

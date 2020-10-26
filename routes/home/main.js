@@ -5,6 +5,13 @@ const User = require('../../models/User')
 const bcrypt = require('bcryptjs')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
+const Contact = require('../../models/Contact')
+const Department = require('../../models/Department')
+const Doctor = require('../../models/Doctor')
+const Appointment = require('../../models/Appointment')
+
+
+
 
 
 router.all('/*', (req, res, next)=>{
@@ -13,7 +20,28 @@ router.all('/*', (req, res, next)=>{
 })
 
 router.get('/', (req, res)=>{
-    res.render('home')
+
+    // const promises = [
+    //     Post.countDocuments().exec(),
+    //     Comment.countDocuments().exec(),
+    //     Reply.countDocuments().exec(),
+    //     Category.countDocuments().exec(),
+    //     User.countDocuments().exec()
+    // ];
+    // Promise.all(promises).then(([posts, comments, replies, categories, users])=>{
+    //     res.render('admin/index', {users: users, posts: posts, comments: comments, replies:replies, categories:categories})
+    // })
+
+    Department.find()
+    .then(depts=>{
+        Doctor.find()
+        .then(docs=>{
+            res.render('home', {depts: depts, docs: docs})
+        })
+        .catch(err=>console.log(err))
+    })
+    .catch(err=>console.log(err))
+   
 })
 
 router.get('/login', (req, res)=>{
@@ -121,5 +149,43 @@ router.get('/logout', (req, res)=>{
     req.logout()
     res.redirect('/')
 })
+
+
+
+
+router.post('/contact', (req, res)=>{
+
+    const newContact = new Contact()
+    newContact.user = req.user.id
+    newContact.subject = req.body.subject
+    newContact.message = req.body.message
+    newContact.save()
+    .then(savedContact=>{
+        req.flash('success_msg', 'Contact has been created successfully :)')
+        res.redirect('/')
+    })
+    .catch(err=>console.log(err))
+
+})
+
+
+
+
+router.post('/appointment', (req, res)=>{
+    const newAppoint = new Appointment
+    newAppoint.user = req.user.id
+    newAppoint.doctor = req.body.doctor
+    newAppoint.department = req.body.department
+    newAppoint.date = req.body.date
+    newAppoint.message = req.body.message
+    newAppoint.save()
+    .then(savedAppoint=>{
+        req.flash('success_msg', 'Appointment created successfully :)')
+        res.redirect('/')      
+    })
+    .catch(err=>console.log(err))
+})
+
+
 
 module.exports = router

@@ -8,57 +8,57 @@
         </div>
 
       {{#if loggedUser}}
-        <form action="forms/appointment.php" method="post" role="form" class="php-email-form">
+        <form action="/appointment" id="appointment_form" method="post">
           <div class="form-row">
             <div class="col-md-4 form-group">
-              <input type="text" name="name" class="form-control" id="name" value="{{#if loggedUser}} {{loggedUser.name}} {{/if}}" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+              <input type="text" name="name" class="form-control" id="name" value="{{#if loggedUser}} {{loggedUser.name}} {{/if}}" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
               <div class="validate"></div>
             </div>
             
             <div class="col-md-4 form-group">
-              <input type="email" class="form-control" name="email" id="email"  value="{{#if loggedUser}} {{loggedUser.email}} {{/if}}" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
+              <input type="email" class="form-control" name="email" id="email"  value="{{#if loggedUser}} {{loggedUser.email}} {{/if}}" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" required>
               <div class="validate"></div>
             </div>
 
             <div class="col-md-4 form-group">
-              <input type="tel" class="form-control" name="phone" id="phone" value="{{#if loggedUser}} {{loggedUser.phone}} {{/if}}" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+              <input type="tel" class="form-control" name="phone" id="phone" value="{{#if loggedUser}} {{loggedUser.phone}} {{/if}}" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
               <div class="validate"></div>
             </div>
           </div>
 
           <div class="form-row">
             <div class="col-md-4 form-group">
-              <input type="datetime" name="date" class="form-control datepicker" id="date" placeholder="Appointment Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+              <input type="datetime" name="date" class="form-control datepicker" id="date" placeholder="Appointment Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
               <div class="validate"></div>
             </div>
 
             <div class="col-md-4 form-group">
-              <select name="department" id="department" class="form-control">
+              <select name="department" id="department" class="form-control" required>
                 <option value="">Select Department</option>
-                <option value="Department 1">Department 1</option>
-                <option value="Department 2">Department 2</option>
-                <option value="Department 3">Department 3</option>
+                {{#each depts}}
+                  <option value="{{id}}">{{name}}</option>
+                {{/each}}
               </select>
               <div class="validate"></div>
             </div>
 
             <div class="col-md-4 form-group">
-              <select name="doctor" id="doctor" class="form-control">
+              <select name="doctor" id="doctor" class="form-control" required>
                 <option value="">Select Doctor</option>
-                <option value="Doctor 1">Doctor 1</option>
-                <option value="Doctor 2">Doctor 2</option>
-                <option value="Doctor 3">Doctor 3</option>
+                {{#each docs}}
+                  <option value="{{id}}">{{name}}</option>
+                {{/each}}
               </select>
               <div class="validate"></div>
             </div>
           </div>
 
           <div class="form-group">
-            <textarea class="form-control" name="message" rows="5" placeholder="Message"></textarea>
+            <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
             <div class="validate"></div>
           </div>
         
-          <div class="text-center"><button type="submit">Make an Appointment</button></div>
+          <div class="text-center"><button type="submit" class="appointment-btn">Make an Appointment</button></div>
         </form>
 
         {{else}}
@@ -66,3 +66,41 @@
         {{/if}}
       </div>
     </section><!-- End Appointment Section -->
+
+
+
+
+
+    
+  <script src="/home/vendor/jquery/jquery.min.js"></script>
+  <script src="/home/vendor/sweetalert.min.js"></script>
+
+  <script>
+    $('#appointment_form').submit(function(e){
+      e.preventDefault()
+      let input = $(this).serialize()
+      console.log(input)
+
+      $.ajax({
+        data: input,
+        url: '/appointment',
+        type: 'Post',
+        cache: false,
+        success: function(data){
+
+          if(!data.error){
+             swal({  //sweetalert.js library
+                        title:  `Contact created`,
+                        text: `Kudos! You've successfully created an appointment with us. `,
+                        icon: "success",    
+                        timer: 5500,
+                        closeOnClickOutside: false  
+                  });
+            $(this).reset()
+
+          }
+        }
+      })
+
+    })
+  </script>

@@ -112,9 +112,13 @@ const labs = require('./routes/admin/research')
 app.use('/admin/labs', labs)
 
 
-//admin users
+//admin service
 const service = require('./routes/admin/service')
 app.use('/admin/service', service)
+
+//admin contact
+const contact = require('./routes/admin/contact')
+app.use('/admin/contact', contact)
 
 
 

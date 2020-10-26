@@ -1,0 +1,33 @@
+
+
+<table class="table table-striped table-responsive">
+    <thead>
+       <tr>
+           <th>Name</th>
+           <th>Email</th>
+           <th>Subject</th>
+           <th>Message</th>
+           <th>Actions</th>
+       </tr>
+    </thead>
+
+    <tbody>
+     {{#if contacts}}
+      
+        {{#each contacts}}
+                <tr>
+                    <td>{{user.name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{subject}}</td>
+                    <td>{{message}}</td>
+                    <td><a href="/admin/contact/edit/{{id}}" class="btn btn-success"><i class="fa fa-pencil"></i> Edit</a></td>
+                    <td><a href="/admin/contact/delete/{{id}}" class="btn btn-danger"><i class="fa fa-remove"></i> Delete</a></td>
+                </tr>
+        {{/each}}
+
+      {{else}}
+        <div class="alert alert-success">No Contact to display</div>
+
+     {{/if}}      
+    </tbody>
+</table>
