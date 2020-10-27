@@ -77,11 +77,6 @@ router.get('/create', (req, res)=>{
     .catch(err=>console(`Error pulling doctors ${err}`))
 })
 
-router.get('/dummy', (req, res)=>{
-    res.render('admin/appointment/dummy')
-})
-
-
 
 router.get('/show/:id', (req, res)=>{
 
@@ -113,7 +108,7 @@ router.get('/edit/:id', (req, res)=>{
 })
 
 
-router.get('/update/:id', (req, res)=>{
+router.post('/update/:id', (req, res)=>{
 
     Appointment.findOne({_id: req.params.id})
     .then(appointment=>{
@@ -123,6 +118,7 @@ router.get('/update/:id', (req, res)=>{
         appointment.message = req.body.message
         appointment.save()
         .then(savedAppoint=>{
+             req.flash('success_msg', 'Appointment has been updated successfully :)')
             if(req.user.status === 'Admin'){
                 res.redirect('/admin/appointment')
             }else{

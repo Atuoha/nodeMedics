@@ -1,11 +1,11 @@
 
-
+{{#ifeq loggedUser.role 'Admin'}}
    <div class="row">
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box blue-bg">
-              <i class="fa fa-cloud-download"></i>
-            <div class="count">6.674</div>
-              <div class="title">Download</div>
+              <i class="icon_document_alt"></i>
+            <div class="count">{{appointCount}}</div>
+              <div class="title">Appointments</div>
             </div>
             <!--/.info-box-->
              
@@ -14,9 +14,9 @@
 
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box brown-bg">
-              <i class="fa fa-shopping-cart"></i>
-              <div class="count">7.538</div>
-              <div class="title">Purchased</div>
+              <i class="icofont-patient-bed"></i>
+              <div class="count">{{deptCount}}</div>
+              <div class="title">Departments</div>
             </div>
             <!--/.info-box-->
           </div>
@@ -24,9 +24,9 @@
 
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box dark-bg">
-              <i class="fa fa-thumbs-o-up"></i>
-              <div class="count">4.362</div>
-              <div class="title">Order</div>
+              <i class="icofont-laboratory"></i>
+              <div class="count">{{researchCount}}</div>
+              <div class="title">Research Labs</div>
             </div>
             <!--/.info-box-->
           </div>
@@ -34,9 +34,9 @@
 
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box green-bg">
-              <i class="fa fa-cubes"></i>
-              <div class="count">1.426</div>
-              <div class="title">Stock</div>
+              <i class="icofont-doctor-alt"></i>
+              <div class="count">{{doctorCount}}</div>
+              <div class="title">Doctors</div>
             </div>
             <!--/.info-box-->
           </div>
@@ -46,3 +46,150 @@
         <!--/.row-->
 
         {{> admin/dashboard_addons}}
+
+{{/ifeq}}
+
+{{#ifeq loggedUser.role 'Subscriber'}} 
+<div class="alert alert-success">Hey {{loggedUser.name}}, welcome on board Captain! We're nodeMedics and we're here to serve you</div>  
+    <div class="row">
+        <div class="col-md-6">
+                <div class="container">
+                  <div class="center-algin text-center justify-content-center m-5 mx-auto">
+                  <div class="row">
+                      <div class="col-md-5">
+                          {{#if profile.file}}
+                              <img src="/uploads/{{profile.file}}" width="250" class="img-circle" alt="">
+                              {{else}}
+                              <img src="/uploads/default.png" alt="">
+                          {{/if}}
+
+                      </div>
+
+                      <div class="col-md-5 mt-2">
+                          <table class="table table-striped table-responsive">
+                              <tr>
+                                  <th>Full Name</th>
+                                  <td>{{profile.name}}</td>
+                              </tr>
+
+                              <tr>
+                                  <th>Email</th>
+                                  <td>{{profile.email}}</td>
+                              </tr>
+
+
+                              <tr>
+                                  <th>Phone</th>
+                                  <td>{{profile.phone}}</td>
+                              </tr>
+
+
+                              <tr>
+                                  <th>Role</th>
+                                  <td>{{profile.role}}</td>
+                              </tr>
+
+                              <tr>
+                                  <th>Status</th>
+                                  <td>{{profile.status}}</td>
+                              </tr>
+
+                              <tr>
+                                  <th>Edit Profile</th>
+                                  <td> <a href="/admin/users/edit/{{profile.id}}" class="btn btn-success"><i class="fa fa-pencil"></i> Edit Profile</a></td>
+                              </tr>
+                          </table>
+                      </div>
+                  </div>
+                  </div>
+                    
+
+           </div>
+        </div>
+
+
+          <div class="col-md-6 portlets">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <div class="pull-left">Book Appointment</div>
+                <div class="widget-icons pull-right">
+                  <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
+                  <a href="#" class="wclose"><i class="fa fa-times"></i></a>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="panel-body">
+                <div class="padd">
+
+                  <div class="form quick-post">
+                  
+                    <form method="POST" action="/admin/appointment/create">
+                        
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group dates-wrap">
+                                    <label class="control-label">Date</label>
+                                    <input type="text" id="datepicker1" placeholder="Appointment Date" required class="form-control" name="date">
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Department</label>
+                                    <select name="department" id="" class="form-control">
+                                        {{#each depts}}
+                                            <option value="{{id}}">{{name}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Doctor</label>
+                                    <select name="doctor" id="" class="form-control">
+                                        {{#each doctors}}
+                                            <option value="{{id}}">{{name}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                    
+                        </div>
+
+                        <div class="form-group">
+                            <label for="" class="control-label">Message</label>
+                            <textarea name="message" id="" placeholder="Enter Message" class="form-control" required cols="30" rows="5"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Book Appointment</button>
+                        </div>
+
+                    </form>
+
+                  </div>
+
+
+                </div>
+                <div class="widget-foot">
+                  <!-- Footer goes here -->
+                </div>
+              </div>
+            </div>
+
+          </div>
+    </div>
+{{/ifeq}}
+
+<!-- Activators -->
+<script src="/admin/js/jquery.js"></script>
+<script>
+    $(document).ready(function(){
+        $( "#datepicker1" ).datepicker();
+        $('#timepicker1').timepicker();
+
+    })
+</script>

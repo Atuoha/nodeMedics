@@ -151,11 +151,12 @@ router.post('/update/:id', (req, res)=>{
                     user.save()
                     .then(savedUser=>{
                         req.flash('success_msg', 'Update was successfully :)')
-                        if(loggedUser.role === 'Admin'){
-                            res.redirect('/admin/users')
-                        }else{
-                            res.redirect(`/admin/users/profile/${req.user.id}`)
-                        }
+                        // if(loggedUser.role === 'Admin'){
+                        //     res.redirect('/admin/users')
+                        // }else{
+                        //     res.redirect(`/admin/users/profile/${req.user.id}`)
+                        // }
+                        res.redirect("back")
                     })
                     .catch(err=>console.log(err))
                 })
