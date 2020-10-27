@@ -24,7 +24,7 @@ router.get('/', (req, res)=>{
 router.get('/loggedUser/:id', (req, res)=>{
     Testimony.find({_id: req.params.id})
     .populate('user')
-    .then(teststests=>{
+    .then(tests=>{
         res.render('admin/testimony/loggedInContacts', {tests: tests})
     })
     .catch(err=>console.log(err))

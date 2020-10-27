@@ -3,19 +3,19 @@
 <table class="table table-striped table-responsive">
     <thead>
        <tr>
-           <th>Name</th>
-           <th>Email</th>
+           <th>Author</th>
            <th>image</th>
-           <th>Field</th>
-           <th>Message</th>
+           <th>Question</th>
+           <th>Tag</th>
+           <th>Answer</th>
            <th>Actions</th>
        </tr>
     </thead>
 
     <tbody>
-     {{#if tests}}
+     {{#if faqs}}
       
-        {{#each tests}}
+        {{#each faqs}}
                 <tr>
                     <td>{{user.name}}</td>
                      {{#if user.file}}
@@ -23,16 +23,16 @@
                         {{else}}
                         <td><img src="/uploads/default.png" alt="" width="40"></td>
                     {{/if}}
-                    <td>{{user.email}}</td>
-                    <td>{{field}}</td>
-                    <td>{{message}}</td>
-                    <td><a href="/admin/testimony/edit/{{id}}" class="btn btn-success"><i class="fa fa-pencil"></i> Edit</a></td>
-                    <td><a href="/admin/testimony/delete/{{id}}" class="btn btn-danger"><i class="fa fa-remove"></i> Delete</a></td>
+                    <td>{{question}}</td>
+                    <td>{{tag}}</td>
+                    <td>{{answer}}</td>
+                    <td><a href="/admin/faq/edit/{{id}}" class="btn btn-success"><i class="fa fa-pencil"></i> Edit</a></td>
+                    <td><a href="/admin/faq/delete/{{id}}" class="btn btn-danger"><i class="fa fa-remove"></i> Delete</a></td>
                 </tr>
         {{/each}}
 
       {{else}}
-        <div class="alert alert-success">No Testimony to display</div>
+        <div class="alert alert-success">No FAQ to display</div>
 
      {{/if}}      
     </tbody>

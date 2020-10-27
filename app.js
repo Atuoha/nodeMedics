@@ -116,6 +116,7 @@ app.use('/admin/labs', labs)
 const service = require('./routes/admin/service')
 app.use('/admin/service', service)
 
+
 //admin contact
 const contact = require('./routes/admin/contact')
 app.use('/admin/contact', contact)
@@ -125,9 +126,15 @@ app.use('/admin/contact', contact)
 const media = require('./routes/admin/media')
 app.use('/admin/media', media)
 
+
 //admin testimony
 const testimony = require('./routes/admin/testimony')
 app.use('/admin/testimony', testimony)
+
+
+//admin faq
+const faq = require('./routes/admin/faq')
+app.use('/admin/faq', faq)
 
 
 

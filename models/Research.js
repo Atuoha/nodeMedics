@@ -28,7 +28,7 @@ const newLab = new Schema({
         type: String
     },
 
-    estDate:{
+    date:{
         type: String
     }, 
 

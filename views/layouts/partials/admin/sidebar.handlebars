@@ -44,7 +44,7 @@
             <ul class="sub">
               <li><a class="" href="/admin/department">All Departments</a></li>
               <li><a class="" href="/admin/department/create">Create Department</a></li>
-              <li><a class="" href="/admin/department/dummy">Create Dummy</a></li>
+              <li><a class="" href="/admin/department/dummy">Generate Dummy</a></li>
             </ul>
           </li>
 
@@ -58,7 +58,7 @@
             <ul class="sub">
               <li><a class="" href="/admin/doctor">All Doctors</a></li>
               <li><a class="" href="/admin/doctor/create">Create Doctor</a></li>
-              <li><a class="" href="/admin/doctor/dummy">Create Dummy</a></li>
+              <li><a class="" href="/admin/doctor/dummy">Generate Dummy</a></li>
             </ul>
           </li>
 
@@ -72,7 +72,7 @@
             <ul class="sub">
               <li><a class="" href="/admin/users">All Users</a></li>
               <li><a class="" href="/admin/users/create">Create Users</a></li>
-              <li><a class="" href="/admin/users/dummy">Create Dummy</a></li>
+              <li><a class="" href="/admin/users/dummy">Generate Dummy</a></li>
             </ul>
           </li>
 
@@ -86,7 +86,7 @@
             <ul class="sub">
               <li><a class="" href="/admin/labs">All Research Labs</a></li>
               <li><a class="" href="/admin/labs/create">Create Research Lab</a></li>
-              <li><a class="" href="/admin/labs/dummy">Create Dummy</a></li>
+              <li><a class="" href="/admin/labs/dummy">Generate Dummy</a></li>
             </ul>
           </li>
 
@@ -110,7 +110,7 @@
             <ul class="sub">
               <li><a class="" href="/admin/service">All Services</a></li>
               <li><a class="" href="/admin/service/create">Create Service</a></li>
-              <li><a class="" href="/admin/service/dummy">Create Dummy</a></li>
+              <li><a class="" href="/admin/service/dummy">Generate Dummy</a></li>
             </ul>
           </li>
         {{/ifeq}}
@@ -125,7 +125,7 @@
             <ul class="sub">
               {{#ifeq loggedUser.role 'Admin'}}
               <li><a class="" href="/admin/contact">All Contacts</a></li>
-              <li><a class="" href="/admin/contact/dummy">Create Dummy</a></li>
+              <li><a class="" href="/admin/contact/dummy">Generate Dummy</a></li>
               {{/ifeq}}
               <li><a class="" href="/admin/contact/create">Create Contact</a></li>
               <li><a class="" href="/admin/contact/loggedUser/{{loggedUser.id}}">My Contacts</a></li>
@@ -141,14 +141,14 @@
             <ul class="sub">
               {{#ifeq loggedUser.role 'Admin'}}
                 <li><a class="" href="/admin/testimony">All Testimonies</a></li>
-                <li><a class="" href="/admin/testimony/dummy">Create Dummy</a></li>
+                <li><a class="" href="/admin/testimony/dummy">Generate Dummy</a></li>
               {{/ifeq}}
-              <li><a class="" href="/admin/testimony/loggedUser/{{loggedUser.id}}">My Testimonies</a></li>
               <li><a class="" href="/admin/testimony/create">Create Testimony</a></li>
+              <li><a class="" href="/admin/testimony/loggedUser/{{loggedUser.id}}">My Testimonies</a></li>
             </ul>
           </li>
 
-
+          {{#ifeq loggedUser.role 'Admin'}}
             <li class="sub-menu">
             <a href="javascript:;" class="">
                           <i class="fa fa-question"></i>
@@ -156,10 +156,10 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              {{#ifeq loggedUser.role 'Admin'}}
-                <li><a class="" href="form_component.html">All FAQs</a></li>
-                <li><a class="" href="form_validation.html">Create Dummy</a></li>
-                <li><a class="" href="form_validation.html">Create FAQ</a></li>
+             
+                <li><a class="" href="/admin/faq">All FAQs</a></li>
+                <li><a class="" href="/admin/faq/dummy">Generate Dummy</a></li>
+                <li><a class="" href="/admin/faq/create">Create FAQ</a></li>
                {{/ifeq}}
             </ul>
           </li>

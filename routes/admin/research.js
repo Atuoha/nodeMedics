@@ -47,14 +47,14 @@ router.post('/create', (req, res)=>{
     const newLab  = new Research()
     newLab.name = req.body.name
     newLab.location = req.body.location
-    newLab.estDate = req.body.estDate
+    newLab.date = req.body.date
     newLab.intro = req.body.intro
     newLab.content = req.body.content
     newLab.tag = req.body.tag
     newLab.file = filename
     newLab.save()
     .then(savedLab=>{
-        req.flash('success_msg', 'Research registered successfully :)')
+        req.flash('success_msg', `${savedLab.name} Research Lab registered successfully :)`)
         res.redirect('/admin/labs')
     })
     .catch(err=>console.log(err))
@@ -73,7 +73,7 @@ router.post('/dummy', (req, res)=>{
         newLab.intro = faker.lorem.sentence()
         newLab.tag = faker.random.word()
         newLab.file = 'img_place.png'
-        newLab.estDate = new Date()
+        newLab.date = new Date()
         newLab.save()
         .then(savedLab=>{
             req.flash('success_msg', `${req.body.number} Dummy Labs registered successfully :)`)
@@ -131,7 +131,7 @@ router.post('/update/:id', (req, res)=>{
         lab.name = req.body.name
         lab.tag = req.body.tag
         lab.location = req.body.location
-        lab.estDate = req.body.estDate
+        lab.date = req.body.date
         lab.intro = req.body.intro
         lab.content = req.body.content
         lab.file = filename

@@ -11,6 +11,11 @@ const Doctor = require('../../models/Doctor')
 const Appointment = require('../../models/Appointment')
 const Research = require('../../models/Research')
 const Media = require('../../models/Media')
+const Service = require('../../models/Service')
+const Faq = require('../../models/Faq')
+const Testimony = require('../../models/Testimony')
+
+
 
 
 
@@ -24,17 +29,13 @@ router.all('/*', (req, res, next)=>{
 
 router.get('/', (req, res)=>{
 
-    // const promises = [
-    //     Post.countDocuments().exec(),
-    //     Comment.countDocuments().exec(),
-    //     Reply.countDocuments().exec(),
-    //     Category.countDocuments().exec(),
-    //     User.countDocuments().exec()
-    // ];
-    // Promise.all(promises).then(([posts, comments, replies, categories, users])=>{
-    //     res.render('admin/index', {users: users, posts: posts, comments: comments, replies:replies, categories:categories})
-    // })
-
+    const promises = [
+        Doctor.countDocuments().exec(),
+        Department.countDocuments().exec(),
+        Research.countDocuments().exec(),
+        Testimony.countDocuments().exec(),
+    ];
+  
     Department.find()
     .then(depts=>{
         Doctor.find()
@@ -43,7 +44,24 @@ router.get('/', (req, res)=>{
             .then(labs=>{
                 Media.find()
                 .then(medias=>{
-                     res.render('home', {depts: depts, docs: docs, labs: labs, medias: medias})
+                    Faq.find()
+                    .then(faqs=>{
+                        Service.find()
+                        .then(services=>{
+                            Testimony.find()
+                            .populate('user')
+                            .then(testimonies=>{
+
+                                Promise.all(promises).then(([doctorsCount, deptsCount, researchCount, testimoniesCount])=>{
+                                    res.render('home', {depts: depts, docs: docs, labs: labs, medias: medias, faqs: faqs, services: services, testimonies: testimonies, doctorsCount: doctorsCount, deptsCount: deptsCount, researchCount: researchCount, testimoniesCount: testimoniesCount})
+                                })
+
+                            })
+                            .catch(err=>console.log(err))
+                        })
+                        .catch(err=>console.log(err))
+                    })
+                    .catch(err=>console.log(err))
                 })
                 .catch(err=>console.log(err))
             })

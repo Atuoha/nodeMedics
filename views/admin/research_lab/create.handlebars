@@ -40,7 +40,7 @@
 
         <div class="col-md-6">
             <label for="" class="control-label">Establishment Date</label>
-            <input type="date/time" class="form-control" required name="estDate" >
+            <input type="datetime" id="datepicker1" class="form-control" required name="date" >
         </div>
     </div>
 
@@ -65,7 +65,7 @@
 
 
 
-
+<script src="/admin/js/jquery.js"></script>
 <!-- SCRIPTING FOR PREVIEWING IMAGE BEFORE UPLOADING  -->
 <script>
 
@@ -93,4 +93,11 @@
             previewImage.setAttribute('src',"");
         }
     })
+
+     $(document).ready(function(){
+        $( "#datepicker1" ).datepicker();
+        $('#timepicker1').timepicker();
+
+    })
 </script>
+   

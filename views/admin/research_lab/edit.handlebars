@@ -44,7 +44,7 @@
 
         <div class="col-md-6">
             <label for="" class="control-label">Establishment Date</label>
-            <input type="date/time" class="form-control" value="{{lab.estDate}}" required name="date" >
+            <input type="datetime" id="datepicker1" class="form-control" value="{{lab.date}}" required name="date" >
         </div>
     </div>
 
@@ -72,6 +72,8 @@
 
 
 
+
+<script src="/admin/js/jquery.js"></script>
 <!-- SCRIPTING FOR PREVIEWING IMAGE BEFORE UPLOADING  -->
 <script>
 
@@ -98,5 +100,11 @@
             previewImage.style.display = 'none';
             previewImage.setAttribute('src',"");
         }
+    })
+
+     $(document).ready(function(){
+        $( "#datepicker1" ).datepicker();
+        $('#timepicker1').timepicker();
+
     })
 </script>
