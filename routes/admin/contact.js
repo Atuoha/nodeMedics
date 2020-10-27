@@ -21,6 +21,17 @@ router.get('/', (req, res)=>{
 })
 
 
+
+router.get('/loggedUser/:id', (req, res)=>{
+    Contact.find({_id: req.params.id})
+    .populate('user')
+    .then(contacts=>{
+        res.render('admin/contact/loggedInContacts', {contacts: contacts})
+    })
+    .catch(err=>console.log(err))
+})
+
+
 router.get('/create', (req, res)=>{
     res.render('admin/contact/create')
 })
@@ -49,7 +60,11 @@ router.post('/create', (req, res)=>{
     newContact.save()
     .then(savedContact=>{
         req.flash('success_msg', 'Contact has been created successfully :)')
-        res.redirect('/admin/contact')
+        if(loggedUser.role === 'Admin'){
+            res.redirect('/admin/contact')
+        }else{
+            res.redirect(`/admin/contact/loggedUser/${req.user.id}`)
+        }
     })
     .catch(err=>console.log(err))
 
@@ -84,7 +99,11 @@ router.post('/update/:id', (req, res)=>{
         contact.save()
         .then(savedContact=>{
             req.flash('success_msg', 'Contact has been updated successfully :)')
-            res.redirect('/admin/contact')
+            if(loggedUser.role === 'Admin'){
+                res.redirect('/admin/contact')
+            }else{
+                res.redirect(`/admin/contact/loggedUser/${req.user.id}`)
+            }
         })
         .catch(err=>console.log(err))
     })
@@ -99,7 +118,11 @@ router.get('/delete/:id', (req, res)=>{
         contact.delete()
         .then(response=>{
             req.flash('success_msg', `${contact.subject} has been deleted successfully :)`)
-            res.redirect('/admin/contact')
+            if(loggedUser.role === 'Admin'){
+                res.redirect('/admin/contact')
+            }else{
+                res.redirect(`/admin/contact/loggedUser/${req.user.id}`)
+            }
         })
         .catch(err=>console.log(err))
     })

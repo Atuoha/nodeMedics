@@ -6,33 +6,33 @@
            <th>Name</th>
            <th>Email</th>
            <th>image</th>
-           <th>Subject</th>
+           <th>Field</th>
            <th>Message</th>
            <th>Actions</th>
        </tr>
     </thead>
 
     <tbody>
-     {{#if contacts}}
+     {{#if tests}}
       
-        {{#each contacts}}
+        {{#each tests}}
                 <tr>
                     <td>{{user.name}}</td>
-                    <td>{{user.email}}</td>
                      {{#if user.file}}
                         <td><img src="/uploads/{{user.file}}" class="img-circle" alt="" width="40"></td>
                         {{else}}
                         <td><img src="/uploads/default.png" alt="" width="40"></td>
                     {{/if}}
-                    <td>{{subject}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{field}}</td>
                     <td>{{message}}</td>
-                    <td><a href="/admin/contact/edit/{{id}}" class="btn btn-success"><i class="fa fa-pencil"></i> Edit</a></td>
-                    <td><a href="/admin/contact/delete/{{id}}" class="btn btn-danger"><i class="fa fa-remove"></i> Delete</a></td>
+                    <td><a href="/admin/test/edit/{{id}}" class="btn btn-success"><i class="fa fa-pencil"></i> Edit</a></td>
+                    <td><a href="/admin/test/delete/{{id}}" class="btn btn-danger"><i class="fa fa-remove"></i> Delete</a></td>
                 </tr>
         {{/each}}
 
       {{else}}
-        <div class="alert alert-success">No Contact to display</div>
+        <div class="alert alert-success">No Testimony to display</div>
 
      {{/if}}      
     </tbody>

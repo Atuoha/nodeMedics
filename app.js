@@ -125,6 +125,10 @@ app.use('/admin/contact', contact)
 const media = require('./routes/admin/media')
 app.use('/admin/media', media)
 
+//admin testimony
+const testimony = require('./routes/admin/testimony')
+app.use('/admin/testimony', testimony)
+
 
 
 app.listen(port, ()=>{

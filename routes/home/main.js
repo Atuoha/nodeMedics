@@ -9,6 +9,9 @@ const Contact = require('../../models/Contact')
 const Department = require('../../models/Department')
 const Doctor = require('../../models/Doctor')
 const Appointment = require('../../models/Appointment')
+const Research = require('../../models/Research')
+const Media = require('../../models/Media')
+
 
 
 
@@ -36,7 +39,15 @@ router.get('/', (req, res)=>{
     .then(depts=>{
         Doctor.find()
         .then(docs=>{
-            res.render('home', {depts: depts, docs: docs})
+            Research.find()
+            .then(labs=>{
+                Media.find()
+                .then(medias=>{
+                     res.render('home', {depts: depts, docs: docs, labs: labs, medias: medias})
+                })
+                .catch(err=>console.log(err))
+            })
+            .catch(err=>console.log(err))
         })
         .catch(err=>console.log(err))
     })
