@@ -37,7 +37,7 @@ router.get('/', (req, res)=>{
 
     User.findOne({_id: req.user.id})
     .then(profile=>{
-        Deptment.find()
+        Department.find()
         .then(depts=>{
             Doctor.find()
             .then(doctors=>{

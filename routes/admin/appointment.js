@@ -27,6 +27,21 @@ router.get('/', (req, res)=>{
 })
 
 
+
+router.get('/create', (req, res)=>{
+    Doctor.find()
+    .then(doctors=>{
+        Department.find()
+        .then(depts=>{
+             res.render('admin/appointment/create', {doctors: doctors, depts: depts})
+        })
+        .catch(err=>console(`Error pulling depts ${err}`))
+    })
+    .catch(err=>console(`Error pulling doctors ${err}`))
+})
+
+
+
 router.get('/:id', (req, res)=>{
     Appointment.find({user: req.user.id})
     .populate('user')
@@ -65,17 +80,7 @@ router.get('/cancelled/:id', (req, res)=>{
 
 })
 
-router.get('/create', (req, res)=>{
-    Doctor.find()
-    .then(doctors=>{
-        Department.find()
-        .then(depts=>{
-             res.render('admin/appointment/create', {doctors: doctors, depts: depts})
-        })
-        .catch(err=>console(`Error pulling depts ${err}`))
-    })
-    .catch(err=>console(`Error pulling doctors ${err}`))
-})
+
 
 
 router.get('/show/:id', (req, res)=>{
