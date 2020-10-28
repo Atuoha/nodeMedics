@@ -127,4 +127,29 @@ router.get('/delete/:id', (req, res)=>{
     .catch(err=>console.log(err))
 })
 
+
+
+
+// Multi Action on Faq
+router.post('/multiaction', (req, res)=>{
+    console.log(req.body.checkboxes)
+
+    Testimony.find({_id: req.body.checkboxes})
+    .then(testimonies=>{
+        testimonies.forEach(testimony=>{
+            testimony.delete()
+            .then(response=>{
+                req.flash('success_msg', `Testimonies has been deleted  successfully :)`)
+                if(loggedUser.role === 'Admin'){
+                    res.redirect('/admin/testimony')
+                }else{
+                    res.redirect(`/admin/testimony/loggedUser/${req.user.id}`)
+                }
+            })
+            .catch(err=>console.log(err))
+        })        
+    })
+     .catch(err=>console.log(err))    
+})
+
 module.exports = router

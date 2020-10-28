@@ -129,4 +129,30 @@ router.get('/delete/:id', (req, res)=>{
     .catch(err=>console.log(err))
 })
 
+
+
+
+// Multi Action on contacts
+router.post('/multiaction', (req, res)=>{
+    console.log(req.body.checkboxes)
+
+    Contact.find({_id: req.body.checkboxes})
+    .then(contacts=>{
+        contacts.forEach(contact=>{
+            contact.delete()
+            .then(response=>{
+                req.flash('success_msg', `${contact.subject} has been deleted successfully :)`)
+                if(loggedUser.role === 'Admin'){
+                    res.redirect('/admin/contact')
+                }else{
+                    res.redirect(`/admin/contact/loggedUser/${req.user.id}`)
+                }
+            })
+            .catch(err=>console.log(err)) 
+        })        
+    })
+     .catch(err=>console.log(err))    
+})
+
+
 module.exports = router

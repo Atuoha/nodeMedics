@@ -207,4 +207,55 @@ router.get('/delete/:id', (req, res)=>{
 })
 
 
+
+
+
+// Multi Action on Users
+router.post('/multiaction', (req, res)=>{
+    console.log(req.body.checkboxes)
+
+    User.find({_id: req.body.checkboxes})
+    .then(users=>{
+        users.forEach(appoint=>{
+            if(req.body.action === 'unactive'){
+                appoint.status = 'Unactive'
+                appoint.save()
+                .then(response=>{
+                    req.flash('success_msg', 'Users updated successfully')
+                        res.redirect('/admin/user')
+                })
+                .catch(err=>console.log(err))
+            }else if(req.body.action === 'active'){
+
+                appoint.status = 'Active'
+                appoint.save()
+                .then(response=>{
+                    req.flash('success_msg', 'Users updated successfully')
+                        res.redirect('/admin/user')
+                })
+                .catch(err=>console.log(err))
+
+            }else{
+                if(user.file !== 'default.png'){
+                    fs.unlink('./public/uploads/' + user.file, err=>{
+                        if(err)console.log(err)
+                    })
+                }
+                appoint.delete()
+                .then(response=>{
+                    req.flash('success_msg', 'user(s) deleted successfully')
+                        res.redirect('/admin/user')
+                })
+                .catch(err=>console.log(err)) 
+            }
+            
+        })
+            
+    })
+     .catch(err=>console.log(err))
+
+    
+})
+
+
 module.exports = router

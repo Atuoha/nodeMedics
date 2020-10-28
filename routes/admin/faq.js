@@ -107,4 +107,25 @@ router.post('/delete/:id', (req, res)=>{
     .catch(err=>console.log(err))
 })
 
+
+
+// Multi Action on Faq
+router.post('/multiaction', (req, res)=>{
+    console.log(req.body.checkboxes)
+
+    Faq.find({_id: req.body.checkboxes})
+    .then(faqs=>{
+        faqs.forEach(faq=>{
+            faq.delete()
+            .then(response=>{
+                req.flash('success_msg', `Faqs has been deleted  successfully :)`)
+                res.redirect('/admin/faq')
+            })
+            .catch(err=>console.log(err))
+        })        
+    })
+     .catch(err=>console.log(err))    
+})
+
+
 module.exports = router

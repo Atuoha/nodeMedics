@@ -41,21 +41,21 @@ router.get('/create', (req, res)=>{
 })
 
 
-
+// loggedInUser appointment
 router.get('/:id', (req, res)=>{
     Appointment.find({user: req.user.id})
     .populate('user')
     .populate('department')
     .populate('doctor')
     .then(appointments=>{
-        res.render('admin/appointment', {appointments: appointments})
+        res.render('admin/appointment/loggedUser_Appointments', {appointments: appointments})
     })
     .catch(err=>console.log(err))
 
 })
 
 
-
+//all cancelled appointments
 router.get('/cancelled', (req, res)=>{
     Appointment.find()
     .populate('user')
@@ -68,13 +68,15 @@ router.get('/cancelled', (req, res)=>{
 
 })
 
+
+// loggedInUser cancelled appointments
 router.get('/cancelled/:id', (req, res)=>{
     Appointment.find({user: req.user.id})
     .populate('user')
     .populate('department')
     .populate('doctor')
     .then(appointments=>{
-        res.render('admin/appointment/cancelled', {appointments: appointments})
+        res.render('admin/appointment/loggedUser_CancelledAppoints', {appointments: appointments})
     })
     .catch(err=>console.log(err))
 
@@ -82,7 +84,7 @@ router.get('/cancelled/:id', (req, res)=>{
 
 
 
-
+// displaying single appointment
 router.get('/show/:id', (req, res)=>{
 
     Appointment.findOne({_id: req.params.id})
@@ -95,6 +97,9 @@ router.get('/show/:id', (req, res)=>{
     .catch(err=>console.log(err))
 })
 
+
+
+// edit page of a single appointment
 router.get('/edit/:id', (req, res)=>{
 
     Appointment.findOne({_id: req.params.id})
@@ -113,47 +118,8 @@ router.get('/edit/:id', (req, res)=>{
 })
 
 
-router.post('/update/:id', (req, res)=>{
 
-    Appointment.findOne({_id: req.params.id})
-    .then(appointment=>{
-        appointment.date = req.body.date
-        appointment.department = req.body.department
-        appointment.doctor = req.body.doctor
-        appointment.message = req.body.message
-        appointment.save()
-        .then(savedAppoint=>{
-             req.flash('success_msg', 'Appointment has been updated successfully :)')
-            if(req.user.status === 'Admin'){
-                res.redirect('/admin/appointment')
-            }else{
-             res.redirect(`/admin/appointment/${req.user.id}`)
-            }
-        })
-    })
-    .catch(err=>console.log(err))
-})
-
-
-router.get('/retrieve/:id', (req, res)=>{
-
-    Appointment.findOne({_id: req.params.id})
-    .then(appointment=>{
-        appointment.status = 'Active'
-        appointment.save()
-        .then(savedAppoint=>{
-            req.flash('success_msg', 'Appointment has successfully been retrieved')
-            if(req.user.status === 'Admin'){
-                res.redirect('/admin/appointment')
-            }else{
-             res.redirect(`/admin/appointment/${req.user.id}`)
-            }
-        })
-    })
-    .catch(err=>console.log(err))
-})
-
-
+// creating an appointment
 router.post('/create', (req, res)=>{
     const newAppoint = new Appointment
 
@@ -165,7 +131,7 @@ router.post('/create', (req, res)=>{
     newAppoint.save()
     .then(savedAppoint=>{
         req.flash('success_msg', 'Appointment created successfully :)')
-        if(req.user.status === 'Admin'){
+        if(req.user.role === 'Admin'){
             res.redirect('/admin/appointment')
         }else{
          res.redirect(`/admin/appointment/${req.user.id}`)
@@ -176,15 +142,19 @@ router.post('/create', (req, res)=>{
 })
 
 
-
-router.get('/delete/:id', (req, res)=>{
+// updating a single appointment
+router.post('/update/:id', (req, res)=>{
 
     Appointment.findOne({_id: req.params.id})
     .then(appointment=>{
-        appointment.delete()
+        appointment.date = req.body.date
+        appointment.department = req.body.department
+        appointment.doctor = req.body.doctor
+        appointment.message = req.body.message
+        appointment.save()
         .then(savedAppoint=>{
-            req.flash('success_msg', 'Appointment has successfully been deleted :)')
-            if(req.user.status === 'Admin'){
+             req.flash('success_msg', 'Appointment has been updated successfully :)')
+            if(req.user.role === 'Admin'){
                 res.redirect('/admin/appointment')
             }else{
              res.redirect(`/admin/appointment/${req.user.id}`)
@@ -196,6 +166,52 @@ router.get('/delete/:id', (req, res)=>{
 
 
 
+
+
+// deleting a single appointment
+router.get('/delete/:id', (req, res)=>{
+
+    Appointment.findOne({_id: req.params.id})
+    .then(appointment=>{
+        appointment.delete()
+        .then(savedAppoint=>{
+            req.flash('success_msg', 'Appointment has successfully been deleted :)')
+            if(req.user.role === 'Admin'){
+                res.redirect('/admin/appointment')
+            }else{
+             res.redirect(`/admin/appointment/${req.user.id}`)
+            }
+        })
+    })
+    .catch(err=>console.log(err))
+})
+
+
+
+
+// retrieving a cancelled appointment
+router.get('/retrieve/:id', (req, res)=>{
+
+    Appointment.findOne({_id: req.params.id})
+    .then(appointment=>{
+        appointment.status = 'Active'
+        appointment.save()
+        .then(savedAppoint=>{
+            req.flash('success_msg', 'Appointment has successfully been retrieved')
+            if(req.user.role === 'Admin'){
+                res.redirect('/admin/appointment')
+            }else{
+             res.redirect(`/admin/appointment/${req.user.id}`)
+            }
+        })
+    })
+    .catch(err=>console.log(err))
+})
+
+
+
+
+// cancelling an appointment
 router.get('/cancel/:id', (req, res)=>{
 
     Appointment.findOne({_id: req.params.id})
@@ -204,7 +220,7 @@ router.get('/cancel/:id', (req, res)=>{
         appointment.save()
         .then(savedAppoint=>{
             req.flash('success_msg', 'Appointment has successfully been cancelled :)')
-            if(req.user.status === 'Admin'){
+            if(req.user.role === 'Admin'){
                 res.redirect('/admin/appointment/cancelled')
             }else{
              res.redirect(`/admin/appointment/cancelled/${req.user.id}`)
@@ -212,6 +228,86 @@ router.get('/cancel/:id', (req, res)=>{
         })
     })
     .catch(err=>console.log(err))
+})
+
+
+
+// Multi Action on Appointed that are not cancelled
+router.post('/multiaction', (req, res)=>{
+    console.log(req.body.checkboxes)
+
+    Appointment.find({_id: req.body.checkboxes})
+    .then(appointments=>{
+        appointments.forEach(appoint=>{
+            if(req.body.action === 'cancel'){
+                appoint.status = 'Unactive'
+                appoint.save()
+                .then(response=>{
+                    req.flash('success_msg', 'Appointment(s) cancelled successfully')
+                    if(req.user.role === 'Admin'){
+                        res.redirect('/admin/appointment/cancelled')
+                    }else{
+                     res.redirect(`/admin/appointment/cancelled/${req.user.id}`)
+                    }
+                })
+                .catch(err=>console.log(err))
+            }else{
+                appoint.delete()
+                .then(response=>{
+                    req.flash('success_msg', 'Appointment(s) deleted successfully')
+                    if(req.user.role === 'Admin'){
+                        res.redirect('/admin/appointment')
+                    }else{
+                     res.redirect(`/admin/appointment/${req.user.id}`)
+                    }
+                })
+                .catch(err=>console.log(err)) 
+            }
+            
+        })
+            
+    })
+     .catch(err=>console.log(err))
+
+    
+})
+
+
+
+
+
+
+
+// Multi Action on Appointed that are cancelled
+router.post('/cancelled_multiaction', (req, res)=>{
+    console.log(req.body.checkboxes)
+
+    Appointment.find({_id: req.body.checkboxes})
+    .then(appointments=>{
+        appointments.forEach(appoint=>{
+            if(req.body.action === 'retrieve'){
+                appoint.status = 'Active'
+                appoint.save()
+                .then(response=>{
+                    req.flash('success_msg', 'Appointment(s) retrieved successfully')
+                    res.redirect('/admin/appointment')
+                })
+                .catch(err=>console.log(err))
+            }else{
+                appoint.delete()
+                .then(response=>{
+                    req.flash('success_msg', 'Appointment(s) deleted successfully')
+                    res.redirect("back")
+                })
+                .catch(err=>console.log(err)) 
+            }
+            
+        })
+            
+    })
+     .catch(err=>console.log(err))
+
+    
 })
 
 

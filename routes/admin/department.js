@@ -162,4 +162,32 @@ router.get('/delete/:id', (req, res)=>{
     .catch(err=> console.log(err))
 })
 
+
+
+
+// Multi Action on departments
+router.post('/multiaction', (req, res)=>{
+    console.log(req.body.checkboxes)
+
+    Department.find({_id: req.body.checkboxes})
+    .then(depts=>{
+        depts.forEach(dept=>{
+            if(dept.file !== 'img_place.png'){
+                fs.unlink('./public/uploads/' + dept.file, err=>{
+                    if(err) console.log(err)
+                })
+            }
+            dept.delete()
+            .then(response=>{
+                req.flash('success_msg', `Departments Deleted successfully :)`)
+                res.redirect('/admin/department')
+            })
+            .catch(err=> console.log(`Can't delete due to ${err}`))
+        })          
+    })
+     .catch(err=>console.log(err))    
+})
+
+
+
 module.exports = router

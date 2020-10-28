@@ -57,4 +57,26 @@ router.get('/delete/:id', (req, res)=>{
     .catch(err=>console.log(err))
 })
 
+
+
+// Multi Action on departments
+router.post('/multiaction', (req, res)=>{
+    console.log(req.body.checkboxes)
+
+    Media.find({_id: req.body.checkboxes})
+    .then(medias=>{
+        medias.forEach(media=>{
+                fs.unlink('./public/uploads/' + dept.file, err=>{
+                    if(err) console.log(err)
+                })
+            media.delete()
+            .then(response=>{
+                req.flash('success_msg', 'Medias successfully trashed :)')   
+            })
+            .catch(err=>console.log(err))
+        })          
+    })
+     .catch(err=>console.log(err))    
+})
+
 module.exports = router

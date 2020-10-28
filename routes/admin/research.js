@@ -166,4 +166,31 @@ router.get('/delete/:id', (req, res)=>{
     .catch(err=> console.log(err))
 })
 
+
+
+
+// Multi Action on reserches
+router.post('/multiaction', (req, res)=>{
+    console.log(req.body.checkboxes)
+
+    Research.find({_id: req.body.checkboxes})
+    .then(researches=>{
+        researches.forEach(research=>{
+            if(research.file !== 'img_place.png'){
+                fs.unlink('./public/uploads/' + research.file, err=>{
+                    if(err) console.log(err)
+                })
+            }
+            research.delete()
+            .then(response=>{
+                req.flash('success_msg', `Researches Deleted successfully :)`)
+                res.redirect('/admin/department')
+            })
+            .catch(err=> console.log(`Can't delete due to ${err}`))
+        })          
+    })
+     .catch(err=>console.log(err))    
+})
+
+
 module.exports = router

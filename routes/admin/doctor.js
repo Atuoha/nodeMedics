@@ -156,4 +156,30 @@ router.get('/delete/:id', (req, res)=>{
 })
 
 
+
+
+// Multi Action on doctors
+router.post('/multiaction', (req, res)=>{
+    console.log(req.body.checkboxes)
+
+    Doctor.find({_id: req.body.checkboxes})
+    .then(doctors=>{
+        doctors.forEach(doctor=>{
+            if(doctor.file !== 'default.png'){
+                fs.unlink('./public/uploads/' + doctor.file, err=>{
+                    if(err) console.log(err)
+                })
+            }
+            doctor.delete()
+            .then(response=>{
+                req.flash('success_msg', `Doctors Deleted successfully :)`)
+                res.redirect('/admin/doctor')
+            })
+            .catch(err=> console.log(`Can't delete due to ${err}`))
+        })          
+    })
+     .catch(err=>console.log(err))    
+})
+
+
 module.exports = router
