@@ -11,6 +11,8 @@ const Service = require('../../models/Service')
 const Faq = require('../../models/Faq')
 const Testimony = require('../../models/Testimony')
 const User = require('../../models/User')
+const Patient = require('../../models/Patient')
+
 
 
 
@@ -32,6 +34,8 @@ router.get('/', (req, res)=>{
         Faq.countDocuments().exec(),
         Contact.countDocuments().exec(),
         Media.countDocuments().exec(),
+        Patient.countDocuments().exec(),
+
     ];
 
 
@@ -41,8 +45,8 @@ router.get('/', (req, res)=>{
         .then(depts=>{
             Doctor.find()
             .then(doctors=>{
-                Promise.all(promises).then(([userCount, appointCount, doctorCount, deptCount, researchCount, testimonyCount, serviceCount, faqCount, contactCount, mediaCount])=>{
-                    res.render('admin/index', {userCount: userCount, appointCount: appointCount, doctorCount: doctorCount, deptCount: deptCount, researchCount: researchCount, testimonyCount: testimonyCount, serviceCount: serviceCount, faqCount: faqCount, contactCount: contactCount, mediaCount: mediaCount, profile: profile, doctors: doctors, depts: depts})
+                Promise.all(promises).then(([userCount, appointCount, doctorCount, deptCount, researchCount, testimonyCount, serviceCount, faqCount, contactCount, mediaCount, patientCount])=>{
+                    res.render('admin/index', {userCount: userCount, appointCount: appointCount, doctorCount: doctorCount, deptCount: deptCount, researchCount: researchCount, testimonyCount: testimonyCount, serviceCount: serviceCount, faqCount: faqCount, contactCount: contactCount, mediaCount: mediaCount, patientCount: patientCount, profile: profile, doctors: doctors, depts: depts})
                 })
             })
             .catch(err=>console.log(err))

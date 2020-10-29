@@ -137,6 +137,11 @@ const faq = require('./routes/admin/faq')
 app.use('/admin/faq', faq)
 
 
+//admin patient
+const patient = require('./routes/admin/patient')
+app.use('/admin/patient', patient)
+
+
 
 app.listen(port, ()=>{
     console.log('Listening...')

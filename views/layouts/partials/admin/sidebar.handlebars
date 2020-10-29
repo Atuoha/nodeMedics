@@ -35,6 +35,21 @@
             </li>
 
         {{#ifeq loggedUser.role 'Admin'}}
+
+              <li class="sub-menu">
+            <a href="javascript:;" class="">
+                          <i class="fa fa-group"></i>
+                          <span>Patients</span>
+                          <span class="menu-arrow arrow_carrot-right"></span>
+                      </a>
+            <ul class="sub">
+              <li><a class="" href="/admin/patient">All Patients</a></li>
+              <li><a class="" href="/admin/patient/create">Create Patient</a></li>
+              <li><a class="" href="/admin/patient/dummy">Generate Dummy</a></li>
+            </ul>
+          </li>
+
+
             <li class="sub-menu">
             <a href="javascript:;" class="">
                           <i class="icofont-patient-bed"></i>
@@ -61,6 +76,7 @@
               <li><a class="" href="/admin/doctor/dummy">Generate Dummy</a></li>
             </ul>
           </li>
+
 
 
           <li class="sub-menu">

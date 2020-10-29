@@ -1,13 +1,12 @@
-<form action="/admin/department/multiaction" method="post" id="del_form">
+<form action="/admin/patient/multiaction" method="post" id="del_form">
 
 <div class="form-group multi_action col-md-4">
   <div class="row">
     <div class="col-md-6">
         <select name="action" id="" class="form-control">
-          <option value="delete">Delete Records</option>
-          <option value="active">Activate Records</option>
-          <option value="unactive">Unactivate Records</option>
-
+          <option value="delete">Delete Patient</option>
+           <option value="discharged">Discharge Patient</option>
+          <option value="active">Active Patient</option>
       </select>
     </div>
 
@@ -27,37 +26,37 @@
            <th>Imagery</th>
            <th>Email</th>
            <th>Phone</th>
-           <th>Role</th>
+           <th>Entry Date</th>
+           <th>Discharge Date</th>
+           <th>Note</th>
            <th>Status</th>
            <th>Actions</th>
        </tr>
     </thead>
 
     <tbody>
-     {{#if users}}
+     {{#if patients}}
       
-        {{#each users}}
+        {{#each patients}}
                 <tr>
                      <td><input type="checkbox" name="checkboxes[]"  value="{{id}}" class="checkboxes"></td>
 </form>
                     <td>{{name}}</td>
-                    {{#if file}}
-                        <td><img src="/uploads/{{file}}" class="img-circle" alt="" width="40"></td>
-                        {{else}}
-                        <td><img src="/uploads/default.png" alt="" width="40"></td>
-                    {{/if}}
+                    <td><img src="/uploads/{{file}}" class="img-circle" alt="" width="40"></td>
                     <td>{{email}}</td>
                     <td>{{phone}}</td>
-                    <td>{{role}}</td>
+                    <td>{{generate_date entry_date 'MMM-Do-Y'}}</td>
+                    <td>{{generate_date discharge_date 'MMM-Do-Y'}}</td>
+                    <td>{{note}}</td>
                     <td>{{status}}</td>
-                    <td><a href="/admin/users/edit/{{id}}" class="btn btn-success"><i class="fa fa-pencil"></i> Edit</a></td>
-                    <td><a href="/admin/users/show/{{id}}" class="btn btn-warning"><i class="fa fa-eye"></i> View</a></td>
-                    <td><a href="/admin/users/delete/{{id}}" class="btn btn-danger"><i class="fa fa-remove"></i> Delete</a></td>
+                    <td><a href="/admin/patient/edit/{{id}}" class="btn btn-success"><i class="fa fa-pencil"></i> Edit</a></td>
+                    <td><a href="/admin/patient/show/{{id}}" class="btn btn-warning"><i class="fa fa-eye"></i> View</a></td>
+                    <td><a href="/admin/patient/delete/{{id}}" class="btn btn-danger"><i class="fa fa-remove"></i> Delete</a></td>
                 </tr>
         {{/each}}
 
       {{else}}
-        <div class="alert alert-success">No User to display</div>
+        <div class="alert alert-success">No Patient to display</div>
 
      {{/if}}      
     </tbody>
@@ -118,7 +117,7 @@
           
             swal({  //sweetalert.js library
               title:  `Delete Success`,
-              text: `Kudos! You've successfully performed operation on marked users. `,
+              text: `Kudos! You've successfully performed operation on marked patients. `,
               icon: "success",    
               timer: 5500,
               closeOnClickOutside: false  
